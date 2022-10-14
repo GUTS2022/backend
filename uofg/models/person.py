@@ -11,4 +11,4 @@ class Person(frozen=True):
   subject: str
   height: int
   hair_colour: str
-  societes: List[str]
+  societies: List[str]
