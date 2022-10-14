@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
 @dataclass
-class Location(frozen=True):
+class Location():
   latitude: float
   longitude: float
