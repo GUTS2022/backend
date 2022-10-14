@@ -10,7 +10,10 @@ class PersonUseCase:
         with open("./uofg/assets/data/people_data.csv", "r") as f:
             reader = csv.reader(f)
             for person in reader:
-                print(person)
+                societies = str.split(person[8].replace("[", "").replace("'", "").replace("]", ""), ',')
+                for i in range(0,len(societies)):
+                    societies[i] = societies[i].strip()
+
                 p = Person(
                     person[0],
                     person[1],
@@ -20,7 +23,7 @@ class PersonUseCase:
                     person[5],
                     person[6],
                     person[7],
-                    str.split(person[8], ',') # get rid of spaces and "'"
+                    societies
                 )
                 persons.append(p)
         
