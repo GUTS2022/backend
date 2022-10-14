@@ -1,7 +1,7 @@
-from flask import render_template, Blueprint
+from flask import Blueprint, jsonify
 
 api = Blueprint('main', __name__)
 
 @api.route("/")
 def index():
-    return render_template("index.html")
+    return jsonify("angus is a goofy")
