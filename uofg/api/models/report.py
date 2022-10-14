@@ -1,9 +1,8 @@
 from dataclasses import dataclass
-from location import Location
 
 @dataclass
-class Report(frozen=True):
+class Report():
   student_id: str
   name: str
   time: str
-  location: Location
+  location: str
