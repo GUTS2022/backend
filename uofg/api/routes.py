@@ -94,6 +94,6 @@ def get_all_societies():
     for person in person_use_case.persons:
         for society in person.societies:
             if society not in societies:
-                societies.append(society.replace('"', "").replace("\\", "").replace("{", "").replace("}", ""))
+                societies.append(society)
 
     return jsonify(societies)

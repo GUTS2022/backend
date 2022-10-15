@@ -11,7 +11,7 @@ class PersonUseCase:
         with open("./uofg/assets/data/people_data.csv", "r") as f:
             reader = csv.reader(f)
             for person in reader:
-                societies = str.split(person[8].replace("[", "").replace("'", "").replace("]", ""), ',')
+                societies = str.split(person[8].replace("[", "").replace("'", "").replace("]", "").replace('"', "").replace("\\", "").replace("{", "").replace("}", ""), ',')
                 for i in range(0,len(societies)):
                     societies[i] = societies[i].strip()
 
