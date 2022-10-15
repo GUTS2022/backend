@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 
 from uofg.api.models.report import Report
+from uofg.api.use_cases.statements_use_case import StatementsUseCase
 from .use_cases.person_use_case import PersonUseCase 
 
 from uofg.api.use_cases.reports_use_case import ReportUseCase
@@ -40,6 +41,16 @@ def people():
         return jsonify(obj)
     else:
         return jsonify(people_use_case.persons)
+
+@api.route("/people/travel_log/<student_id>", methods=['GET'])
+def travel_log(student_id):
+    reports_use_case = ReportUseCase()
+    return jsonify(reports_use_case.get_all_reports_for_person(student_id))
+
+@api.route("/people/statement/<student_id>", methods=['GET'])
+def get_statement(student_id):
+    statement_use_case = StatementsUseCase()
+    return jsonify(statement_use_case.get_statement_by_id(student_id))
 
 @api.route("/people/place/<time>", methods=['GET'])
 def get_people_place(time):

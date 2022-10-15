@@ -34,6 +34,14 @@ class ReportUseCase:
         
         return "Not found!"
 
+    def get_all_reports_for_person(self, id):
+        reports = []
+        for report in self.reports:
+            if report.student_id == id:
+                reports.append(report)
+
+        return reports
+
     def get_reports_at_time(self, time):
         reports = []
         for report in self.reports:
