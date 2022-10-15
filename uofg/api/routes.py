@@ -1,4 +1,6 @@
 from flask import Blueprint, jsonify, request
+
+from uofg.api.models.report import Report
 from .use_cases.person_use_case import PersonUseCase 
 
 from uofg.api.use_cases.reports_use_case import ReportUseCase
@@ -39,9 +41,24 @@ def people():
 
     return jsonify(people_use_case.persons)
 
-@api.route("/get_people_location", methods=['GET'])
-def get_people_location(time):
-    people_use_case = PersonUseCase()
-    location_use_case = LocationUseCase()
+@api.route("/people/place/<time>", methods=['GET'])
+def get_people_place(time):
+    place_use_case = PlacesUseCase()
+    reports_use_case = ReportUseCase()
+
+    reports_at_time = reports_use_case.get_reports_at_time(time)
+    people_at_place_at_time = []
+
+    for report in reports_at_time:
+        for place in place_use_case.places:
+            if place.name == report.place_name:
+                latlong = place.location
+        people_at_place_at_time.append({
+            "StudentID": report.student_id,
+            "StudentName": report.name,
+            "PlaceName": report.place_name,
+            "Location": latlong,
+        })
     
+    return jsonify(people_at_place_at_time)
     

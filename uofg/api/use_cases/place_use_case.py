@@ -25,15 +25,12 @@ class PlacesUseCase:
                 self.places.append(place)
 
     def format_time(self, time_str):
-        time_str = time_str.split("-")
-        time_str = "".join(time_str)
-        time_with_colon = time_str[:4] + ":" + time_str[4:]
-        time_with_colon = time_with_colon.split(":")
+        time_str = time_str.strip().split("-")
         
-        hours = time_with_colon[0]
-        minutes = time_with_colon[1]
+        start = time_str[0]
+        end = time_str[1]
 
-        opening_hours = OpeningHours(hours, minutes)
+        opening_hours = OpeningHours(start, end)
 
         return opening_hours
 
