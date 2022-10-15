@@ -38,3 +38,10 @@ def people():
         return jsonify(obj)
 
     return jsonify(people_use_case.persons)
+
+@api.route("/get_people_location", methods=['GET'])
+def get_people_location(time):
+    people_use_case = PersonUseCase()
+    location_use_case = LocationUseCase()
+    
+    
