@@ -1,9 +1,11 @@
 from dataclasses import dataclass
-from location import Location
+
+from .location import Location
+from .opening_hours import OpeningHours
 
 @dataclass
-class Place(frozen=True):
-  building_name: str
-  opening_times: str
-  description: str
+class Place():
+  name: str
   location: Location
+  opening_hours: OpeningHours
+  description: str

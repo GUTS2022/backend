@@ -2,20 +2,20 @@ from flask import Blueprint, jsonify, request
 from .use_cases.person_use_case import PersonUseCase 
 
 from uofg.api.use_cases.reports_use_case import ReportUseCase
-from .use_cases.location_use_case import LocationUseCase
+from .use_cases.place_use_case import PlacesUseCase
 
 api = Blueprint('main', __name__)
 
-@api.route("/locations", methods=['GET'])
-def locations():
-    location_use_case = LocationUseCase()
+@api.route("/places", methods=['GET'])
+def places():
+    places_use_case = PlacesUseCase()
 
     if request.args.get('name'):
         name = request.args.get('name')
-        obj = location_use_case.get_location_by_name(name)
+        obj = places_use_case.get_place_by_name(name)
         return jsonify(obj)
 
-    return jsonify(location_use_case.locations)
+    return jsonify(places_use_case.places)
 
 @api.route("/reports", methods=['GET'])
 def reports():
