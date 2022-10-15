@@ -42,14 +42,27 @@ class ReportUseCase:
 
         return reports
 
-    def get_reports_at_time(self, time):
-        reports = []
-        for report in self.reports:
-            if report.present_hours.start_time > report.present_hours.end_time:
-                report.present_hours.end_time = str(int(report.present_hours.end_time) + 2400)
+    def get_reports_at_time(self, time, end_time=False):
+        if end_time != False:
+            reports = []
+            for report in self.reports:
+                if report.present_hours.start_time > report.present_hours.end_time:
+                    report.present_hours.end_time = str(int(report.present_hours.end_time) + 2400)
 
-            if report.present_hours.start_time <= time <= report.present_hours.end_time:
-                print(report.present_hours.start_time + "is less than" + time + "d_time:which is less than " + report.present_hours.end_time)
-                reports.append(report)
+                if (report.present_hours.start_time <= time <= report.present_hours.end_time
+                or report.present_hours.start_time <= end_time <= report.present_hours.end_time
+                or (time <= report.present_hours.start_time and end_time >= report.present_hours.end_time)):
+                    reports.append(report)
+            
+            return reports
 
-        return reports
+        else:
+            reports = []
+            for report in self.reports:
+                if report.present_hours.start_time > report.present_hours.end_time:
+                    report.present_hours.end_time = str(int(report.present_hours.end_time) + 2400)
+
+                if report.present_hours.start_time <= time <= report.present_hours.end_time:
+                    reports.append(report)
+
+            return reports

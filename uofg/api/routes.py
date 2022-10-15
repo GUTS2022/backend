@@ -56,22 +56,40 @@ def get_statement(student_id):
 def get_people_place(time):
     place_use_case = PlacesUseCase()
     reports_use_case = ReportUseCase()
-
-    reports_at_time = reports_use_case.get_reports_at_time(time)
-    people_at_place_at_time = []
-
-    for report in reports_at_time:
-        for place in place_use_case.places:
-            if place.name == report.place_name:
-                latlong = place.location
-        people_at_place_at_time.append({
-            "StudentID": report.student_id,
-            "StudentName": report.name,
-            "PlaceName": report.place_name,
-            "Location": latlong,
-        })
     
-    return jsonify(people_at_place_at_time)
+    if request.args.get('end'):
+        reports_at_time = reports_use_case.get_reports_at_time(time, request.args.get('end'))
+        people_at_place_at_time = []
+
+        for report in reports_at_time:
+            for place in place_use_case.places:
+                if place.name == report.place_name:
+                    latlong = place.location
+            people_at_place_at_time.append({
+                "StudentID": report.student_id,
+                "StudentName": report.name,
+                "PlaceName": report.place_name,
+                "Location": latlong,
+            })
+        
+        return jsonify(people_at_place_at_time)
+
+    else:
+        reports_at_time = reports_use_case.get_reports_at_time(time)
+        people_at_place_at_time = []
+
+        for report in reports_at_time:
+            for place in place_use_case.places:
+                if place.name == report.place_name:
+                    latlong = place.location
+            people_at_place_at_time.append({
+                "StudentID": report.student_id,
+                "StudentName": report.name,
+                "PlaceName": report.place_name,
+                "Location": latlong,
+            })
+        
+        return jsonify(people_at_place_at_time)
     
 @api.route("/people/group/course", methods=['GET'])
 def group_by_course():
