@@ -38,8 +38,8 @@ def people():
         student_id = request.args.get('id')
         obj = people_use_case.get_person_by_student_id(student_id)
         return jsonify(obj)
-
-    return jsonify(people_use_case.persons)
+    else:
+        return jsonify(people_use_case.persons)
 
 @api.route("/people/place/<time>", methods=['GET'])
 def get_people_place(time):
