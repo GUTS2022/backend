@@ -62,3 +62,15 @@ def get_people_place(time):
     
     return jsonify(people_at_place_at_time)
     
+@api.route("/people/group/course", methods=['GET'])
+def group_by_course():
+    person_use_case = PersonUseCase()
+
+    students_in_course = {}
+    for person in person_use_case.persons:
+        if person.subject in students_in_course:
+            students_in_course[person.subject].append(person)
+        else:
+            students_in_course.update({person.subject:[person]})
+
+    return jsonify(students_in_course)
