@@ -19,7 +19,7 @@ def get_all_locations():
 def get_all_reports():
     report_use_case = ReportUseCase()
     return jsonify(report_use_case.reports)
-    
+
 @api.route("/get_all_people", methods=['GET'])
 def get_all_people():
     people_object = PersonUseCase()
