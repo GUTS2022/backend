@@ -4,8 +4,10 @@ from ..models.person import Person
 
 class PersonUseCase:
     def __init__(self):
-        ...
-    def genPersonArray(self):
+        self.all_persons = []
+        self.gen_person_array()
+
+    def gen_person_array(self):
         persons = []
         with open("./uofg/assets/data/people_data.csv", "r") as f:
             reader = csv.reader(f)
@@ -27,4 +29,4 @@ class PersonUseCase:
                 )
                 persons.append(p)
         
-        return persons
+        self.all_persons = persons

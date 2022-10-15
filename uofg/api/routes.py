@@ -1,6 +1,6 @@
 from crypt import methods
 from flask import Blueprint, jsonify
-from .use_cases.person_use_case import *
+from .use_cases.person_use_case import PersonUseCase 
 
 api = Blueprint('main', __name__)
 
@@ -8,7 +8,7 @@ api = Blueprint('main', __name__)
 def index():
     return jsonify("angus is a goofy")
 
-@api.route("/getAllPeople", methods=['GET'])
-def getAllPeople():
-    peopleObject = PersonUseCase()
-    return jsonify(peopleObject.genPersonArray())
+@api.route("/get_all_people", methods=['GET'])
+def get_all_people():
+    people_object = PersonUseCase()
+    return jsonify(people_object.all_persons)
