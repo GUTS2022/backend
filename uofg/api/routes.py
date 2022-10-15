@@ -74,3 +74,26 @@ def group_by_course():
             students_in_course.update({person.subject:[person]})
 
     return jsonify(students_in_course)
+
+@api.route("/courses", methods=['GET'])
+def get_all_courses():
+    person_use_case = PersonUseCase()
+
+    courses = []
+    for person in person_use_case.persons:
+        if person.subject not in courses:
+            courses.append(person.subject)
+
+    return jsonify(courses)
+
+@api.route("/societies", methods=['GET'])
+def get_all_societies():
+    person_use_case = PersonUseCase()
+
+    societies = []
+    for person in person_use_case.persons:
+        for society in person.societies:
+            if society not in societies:
+                societies.append(society.replace('"', "").replace("\\", "").replace("{", "").replace("}", ""))
+
+    return jsonify(societies)
