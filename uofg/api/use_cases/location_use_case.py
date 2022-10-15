@@ -16,3 +16,10 @@ class LocationUseCase:
                 lat_lon = row[1].split(' ')
                 location = Location(name, float(lat_lon[0][1:]), float(lat_lon[1][:-1]))
                 self.locations.append(location)
+
+    def get_location_by_name(self, name):
+        for location in self.locations:
+            if location.name == name:
+                return location
+        
+        return "Not found!"

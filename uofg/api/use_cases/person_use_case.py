@@ -4,7 +4,7 @@ from ..models.person import Person
 
 class PersonUseCase:
     def __init__(self):
-        self.all_persons = []
+        self.persons = []
         self.gen_person_array()
 
     def gen_person_array(self):
@@ -26,4 +26,12 @@ class PersonUseCase:
                     person[7],
                     societies
                 )
-                self.all_persons.append(p)
+                
+                self.persons.append(p)
+
+    def get_person_by_student_id(self, id):
+        for person in self.persons:
+            if person.student_id == id:
+                return person
+        
+        return "Not found!"

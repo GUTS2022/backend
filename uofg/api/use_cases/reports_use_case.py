@@ -14,3 +14,10 @@ class ReportUseCase:
             for row in reader:
                 report = Report(row[0], row[1], row[2], row[3])
                 self.reports.append(report)
+
+    def get_report_by_id(self, id):
+        for report in self.reports:
+            if report.student_id == id:
+                return report
+        
+        return "Not found!"
