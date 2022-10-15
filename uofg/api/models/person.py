@@ -2,11 +2,11 @@ from dataclasses import dataclass
 from typing import List
 
 @dataclass
-class Person(frozen=True):
+class Person():
   student_id: str
   name: str
   age: int
-  sex: bool
+  sex: str 
   year: int
   subject: str
   height: int

@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify
+from .use_cases.person_use_case import PersonUseCase 
 
 from uofg.api.use_cases.reports_use_case import ReportUseCase
 from .use_cases.location_use_case import LocationUseCase
@@ -18,3 +19,8 @@ def get_all_locations():
 def get_all_reports():
     report_use_case = ReportUseCase()
     return jsonify(report_use_case.reports)
+    
+@api.route("/get_all_people", methods=['GET'])
+def get_all_people():
+    people_object = PersonUseCase()
+    return jsonify(people_object.all_persons)
