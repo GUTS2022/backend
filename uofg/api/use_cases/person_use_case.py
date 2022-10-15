@@ -8,7 +8,6 @@ class PersonUseCase:
         self.gen_person_array()
 
     def gen_person_array(self):
-        persons = []
         with open("./uofg/assets/data/people_data.csv", "r") as f:
             reader = csv.reader(f)
             for person in reader:
@@ -19,14 +18,12 @@ class PersonUseCase:
                 p = Person(
                     person[0],
                     person[1],
-                    person[2],
+                    int(person[2]),
                     person[3],
-                    person[4],
+                    int(person[4]),
                     person[5],
-                    person[6],
+                    int(person[6]),
                     person[7],
                     societies
                 )
-                persons.append(p)
-        
-        self.all_persons = persons
+                self.all_persons.append(p)

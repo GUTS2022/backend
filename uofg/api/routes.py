@@ -6,21 +6,17 @@ from .use_cases.location_use_case import LocationUseCase
 
 api = Blueprint('main', __name__)
 
-@api.route("/", methods=['GET'])
-def index():
-    return jsonify("angus is a goofy")
-
-@api.route("/get_all_locations", methods=['GET'])
-def get_all_locations():
+@api.route("/locations", methods=['GET'])
+def locations():
     location_use_case = LocationUseCase()
     return jsonify(location_use_case.locations)
 
-@api.route("/get_all_reports", methods=['GET'])
-def get_all_reports():
+@api.route("/reports", methods=['GET'])
+def reports():
     report_use_case = ReportUseCase()
     return jsonify(report_use_case.reports)
     
-@api.route("/get_all_people", methods=['GET'])
-def get_all_people():
+@api.route("/people", methods=['GET'])
+def people():
     people_object = PersonUseCase()
     return jsonify(people_object.all_persons)

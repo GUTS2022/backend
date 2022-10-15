@@ -12,6 +12,7 @@ class LocationUseCase:
         with open('./uofg/assets/data/location_data.csv', 'r') as f:
             reader = csv.reader(f)
             for row in reader:
+                name = row[0]
                 lat_lon = row[1].split(' ')
-                location = Location(float(lat_lon[0][1:]), float(lat_lon[1][:-1]))
+                location = Location(name, float(lat_lon[0][1:]), float(lat_lon[1][:-1]))
                 self.locations.append(location)
