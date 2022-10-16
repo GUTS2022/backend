@@ -126,3 +126,8 @@ def get_all_societies():
                 societies.append(society)
 
     return jsonify(societies)
+
+@api.route("/statements", methods=['GET'])
+def get_all_statements():
+    statement_use_case = StatementsUseCase()
+    return jsonify(statement_use_case.statements)
